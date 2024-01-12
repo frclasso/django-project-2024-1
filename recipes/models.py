@@ -21,9 +21,9 @@ class Recipe(models.Model):
     created_at  = models.DateTimeField(auto_now_add=True)  # adicional uma data na criacao, que nao sera auterada
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=False)
-    cover = models.ImageField(upload_to='recipes/cover/%Y/%m/%d')
+    cover = models.ImageField(upload_to='recipes/cover/%Y/%m/%d', blank=True, default='')
     # Category
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, default=None)
     # User
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
@@ -31,3 +31,7 @@ class Recipe(models.Model):
         return self.title
 
 
+
+
+# Creating user via shell
+# User.objects.create_user(first_name='Giovanna', last_name='Classo', username='gigiclasso', email='gigiclasso@gmail.com', password='gigi2024')
