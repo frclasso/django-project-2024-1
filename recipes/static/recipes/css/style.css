@@ -273,3 +273,38 @@ h6 {
     box-shadow: -5px 5px 15px rgba(0, 0, 0, .2);
 
 }
+
+.preparation-steps h1,h2, h3, h4, h5, h6, p, 
+
+.preparation-steps pre {
+    margin: 2rem 0;
+}
+
+.preparation-steps ol, ul {
+    margin: 2rem;
+    padding: 0 2rem;
+
+}
+
+.preparation-steps p{
+    text-align: justify;
+}
+
+
+
+/* Generics */
+.center{
+    text-align: center;
+}
+
+.m-x{
+    margin: 0 var(--spacing-gutter-medium);
+}
+
+.m-y{
+    margin: var(--spacing-gutter-medium) 0;
+}
+
+.sem-receitas{
+    margin-top: 4rem;
+}
