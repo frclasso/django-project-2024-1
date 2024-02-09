@@ -17,3 +17,6 @@ class ReceipeViewTest(TestCase):
     def test_recipe_detail_view_function_is_ok(self):
         view = resolve(reverse('recipes:recipe', kwargs={'id': 1}))
         self.assertIs(view.func, views.detail)
+
+    def test_recipe_home_view_returns_status_code_200_ok(self):
+        response = self.client.get(reverse('recipes:home'))
