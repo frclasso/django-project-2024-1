@@ -27,7 +27,7 @@ def category(request, category_id):
                                                                 'title':f'{recipes[0].category.name} - Category'
                                                                 })
 
-def recipe(request, id):
+def detail(request, id):
     # recipe =   Recipe.objects.filter(
     #                                     pk=id, 
     #                                     is_published=True).order_by('-id').first()
