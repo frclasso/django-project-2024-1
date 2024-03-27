@@ -12,3 +12,5 @@ coverage run  -m pytest
 coverage run manage.py test
 
 
+-- gerando html
+coverage html

@@ -48,3 +48,13 @@ class RecipeModelTest(RecipeTestBase):
         recipe = self.make_recipce_no_defaults()
         self.assertFalse(recipe.is_published,
                         msg='Recipe is_published is True by default.')
+        
+    def test_recipe_model_string_representation(self):
+        self.recipe.title = 'Testing representation!'
+        self.recipe.full_clean()
+        self.recipe.save()
+        self.assertEqual(
+            str(self.recipe), 
+            'Testing representation!',
+            msg=f'Recipe string representation must be equals {self.recipe.title}'
+            )
