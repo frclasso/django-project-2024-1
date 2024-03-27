@@ -112,3 +112,7 @@ class ReceipeViewTest(RecipeTestBase):
                  )
             )
         self.assertEqual(response.status_code, 404)
+
+    def test_recipe_search_view(self):
+        resolved = resolve(reverse('recipes:search'))
+        self.assertIs(resolved.func , views.search)
