@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_list_or_404, get_object_or_404
-from django.http import HttpResponse
-from utils.recipes.factory import make_recipe
+from django.http import HttpResponse, Http404
 from .models import *
-from django.http import HttpResponse
+from utils.recipes.factory import make_recipe
+
 
 # Create your views here.
 
@@ -40,4 +40,10 @@ def detail(request, id):
                                                                     })
 
 def search(request):
-    ...
+    search_term = request.GET.get("q", '').strip()
+    if not search_term:
+        raise Http404()
+    return render(request, 'recipes/pages/search.html',
+                  {
+                      'page_title': f'Search for "{search_term}" |',
+                  })
