@@ -31,7 +31,5 @@ class Recipe(models.Model):
         return self.title
 
 
-
-
 # Creating user via shell
 # User.objects.create_user(first_name='Giovanna', last_name='Classo', username='gigiclasso', email='gigiclasso@gmail.com', password='gigi2024')
