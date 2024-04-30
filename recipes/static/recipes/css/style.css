@@ -308,3 +308,25 @@ h6 {
 .sem-receitas{
     margin-top: 4rem;
 }
+
+.pagination-content {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem 0.5rem;
+}
+
+.pagination .page-item {
+   text-decoration: none;
+    background: var(--color-gray-3);
+    padding: 0.5rem 1rem ;
+}
+
+.pagination .page-link {
+    text-decoration: none;
+     background: var(--color-primary);
+     color: var(--color-white);
+ }
+
+ .pagination .page-current {
+    background: var(--color-primary-dark);
+ }
