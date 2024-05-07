@@ -4,7 +4,7 @@ from .models import *
 from utils.recipes.factory import make_recipe
 from django.db.models import Q
 from django.core.paginator import Paginator
-from utils.tests.pagination import make_pagination_range
+from utils.tests.pagination import make_pagination
 
 # Create your views here.
 
@@ -14,23 +14,7 @@ from utils.tests.pagination import make_pagination_range
     
 def home(request):
     recipes = Recipe.objects.filter(is_published=True).order_by('-id')
-    # recipes = get_list_or_404(Recipe.objects.filter(is_published=True).order_by('-id'))
-
-    
-    current_page = request.GET.get('page', 1)
-    try:
-        current_page = int(request.GET.get('page', 1))
-    except ValueError:
-        current_page = 1
-
-    paginator = Paginator(recipes, 6)
-    page_obj = paginator.get_page(current_page)
-
-    pagination_range = make_pagination_range(
-        paginator.page_range,
-        4,
-        current_page
-    )
+    page_obj, pagination_range = make_pagination(request, recipes, per_page=9)
 
     return render(request, 'recipes/pages/home.html', context={
         'recipes': page_obj,
@@ -46,8 +30,11 @@ def category(request, category_id):
                                 Recipe.objects.filter(category__id=category_id, 
                                                       is_published=True).order_by('-id'))
 
+    page_obj, pagination_range = make_pagination(request, recipes, per_page=9)
+
     return render(request, 'recipes/pages/category.html', context={
-                                                                'recipes': recipes,
+                                                                'recipes': page_obj,
+                                                                'pagination_range':pagination_range,
                                                                 'title':f'{recipes[0].category.name} - Category'
                                                                 })
 
@@ -75,9 +62,13 @@ def search(request):
                                         )
                                     ).order_by('-id')
 
+    page_obj, pagination_range = make_pagination(request, recipes, per_page=9)
+
     return render(request, 'recipes/pages/search.html',
                   {
-                      'page_title': f'Search for "{search_term}" |',
-                      'search_term':search_term,
-                      'recipes': recipes,
+                        'page_title': f'Search for "{search_term}" |',
+                        'search_term':search_term,
+                        'recipes': page_obj,
+                        'pagination_range':pagination_range,    
+                        'addtional_url_query': f'&q={search_term}',
                   })
